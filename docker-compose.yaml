@@ -1,7 +1,7 @@
 version: '3.7'
 services:
   database:
-    image: mariadb:latest
+    image: mariadb
     command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
     restart: unless-stopped
     environment:
@@ -15,12 +15,12 @@ services:
       - db:/var/lib/mysql
 
   nextcloud:
-    depends_on:
+    links:
       - database
-    image: nextcloud:latest
+    image: nextcloud
     restart: unless-stopped
     environment:
-      MYSQL_HOST: 'database'
+      MYSQL_HOST: "database"
       MYSQL_DATABASE: "nextcloud"
       MYSQL_USER: "nextcloud"
       MYSQL_PASSWORD: ${MYSQL_PASS}
