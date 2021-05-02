@@ -9,8 +9,6 @@ services:
       MYSQL_DATABASE: "nextcloud"
       MYSQL_USER: "nextcloud"
       MYSQL_PASSWORD_FILE: './secrets/mysql-password'
-    secrets:
-      - mysql-password
     networks:
       - lan 
     volumes: 
@@ -29,10 +27,6 @@ services:
       NEXTCLOUD_ADMIN_PASSWORD: ${NEXTCLOUD_ADMIN_PASSWORD}
       NEXTCLOUD_ADMIN_USER: igloonet
       NEXTCLOUD_TRUSTED_DOMAINS: ${NEXTCLOUD_URL}
-    secrets:
-      - mysql-user
-      - mysql-database
-      - mysql-password
     networks:
       - lan
       - traefik_web
