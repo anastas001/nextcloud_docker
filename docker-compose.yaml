@@ -8,7 +8,7 @@ services:
       MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
       MYSQL_DATABASE: "nextcloud"
       MYSQL_USER: "nextcloud"
-      MYSQL_PASSWORD_FILE: '/run/secrets/mysql-password'
+      MYSQL_PASSWORD_FILE: './secrets/mysql-password.txt'
     secrets:
       - mysql-password
     networks:
@@ -25,7 +25,7 @@ services:
       MYSQL_HOST: 'database'
       MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
       MYSQL_DATABASE: "nextcloud"
-      MYSQL_PASSWORD_FILE: '/run/secrets/mysql-password'
+      MYSQL_PASSWORD_FILE: './secrets/mysql-password.txt'
       NEXTCLOUD_ADMIN_PASSWORD: ${NEXTCLOUD_ADMIN_PASSWORD}
       NEXTCLOUD_ADMIN_USER: igloonet
       NEXTCLOUD_TRUSTED_DOMAINS: ${NEXTCLOUD_URL}
@@ -52,6 +52,5 @@ volumes:
 networks:
   traefik_web:
     external: true
-
-  mysql-password:
-    file: ./secrets/mysql-password.txt
+    
+  lan:
