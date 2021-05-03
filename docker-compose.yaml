@@ -19,6 +19,7 @@ services:
       - database
     image: nextcloud
     restart: unless-stopped
+    container_name: ${CONTAINER_NAME}
     environment:
       MYSQL_HOST: "database"
       MYSQL_DATABASE: "nextcloud"
