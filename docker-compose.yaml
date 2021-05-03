@@ -1,6 +1,6 @@
 version: '3.9'
 services:
-  ${SQL_NAME}:
+  database:
     image: mariadb
     container_name: ${SQL_NAME}
     command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
@@ -15,7 +15,7 @@ services:
     networks:
       - lan 
 
-  ${NX_NAME}:
+  nextcloud:
     links:
       - database
     image: nextcloud
