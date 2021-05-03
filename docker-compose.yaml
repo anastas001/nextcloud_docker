@@ -16,6 +16,8 @@ services:
       - lan 
 
   nextcloud:
+    depends on:
+      - database
     image: nextcloud
     restart: unless-stopped
     container_name: ${NX_NAME}
