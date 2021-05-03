@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3.9'
 services:
   database:
     image: mariadb
@@ -29,13 +29,11 @@ services:
       NEXTCLOUD_ADMIN_PASSWORD: ${NEXTCLOUD_ADMIN_PASSWORD}
       NEXTCLOUD_ADMIN_USER: "igloonet"
       NEXTCLOUD_TRUSTED_DOMAINS: ${NEXTCLOUD_URL}
-    resources:
-      limits:
-        cpus: ${CPU_LIMIT}
-        memory: ${MEM_LIMIT}
-      reservations:
-        cpus: ${CPU_RESERVATION}
-        memory: ${MEM_RESERVATION}
+
+    mem_limit: ${MEM_LIMIT}
+    mem_reservation: ${MEM_RESERVATION}
+    cpus: $CPU_LIMIT
+
     networks:
       - lan
       - traefik_web
