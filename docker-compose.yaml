@@ -2,6 +2,7 @@ version: '3.7'
 services:
   database:
     image: mariadb
+    container_name: ${SQL_NAME}
     command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
     restart: unless-stopped
     environment:
@@ -19,7 +20,7 @@ services:
       - database
     image: nextcloud
     restart: unless-stopped
-    container_name: ${CONTAINER_NAME}
+    container_name: ${NX_NAME}
     environment:
       MYSQL_HOST: "database"
       MYSQL_DATABASE: "nextcloud"
