@@ -29,6 +29,13 @@ services:
       NEXTCLOUD_ADMIN_PASSWORD: ${NEXTCLOUD_ADMIN_PASSWORD}
       NEXTCLOUD_ADMIN_USER: "igloonet"
       NEXTCLOUD_TRUSTED_DOMAINS: ${NEXTCLOUD_URL}
+    resources:
+      limits:
+        cpus: ${CPU_LIMIT}
+        memory: ${MEM_LIMIT}
+      reservations:
+        cpus: ${CPU_RESERVATION}
+        memory: ${MEM_RESERVATION}
     networks:
       - lan
       - traefik_web
