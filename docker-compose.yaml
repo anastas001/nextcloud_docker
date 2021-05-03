@@ -17,7 +17,7 @@ services:
 
   nextcloud:
     links:
-      - database
+      - SQL_${NomClient}
     image: nextcloud
     restart: unless-stopped
     container_name: ${NX_NAME}
