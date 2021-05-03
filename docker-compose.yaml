@@ -16,7 +16,7 @@ services:
       - lan 
 
   nextcloud:
-    depends on:
+    depends_on:
       - database
     image: nextcloud
     restart: unless-stopped
