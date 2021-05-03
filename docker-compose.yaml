@@ -5,7 +5,7 @@ services:
     command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
     restart: unless-stopped
     environment:
-      MYSQL_RANDOM_ROOT_PASSWORD: ${MYSQL_ROOT}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT}
       MYSQL_DATABASE: "nextcloud"
       MYSQL_USER: "nextcloud"
       MYSQL_PASSWORD: ${MYSQL_PASS}
