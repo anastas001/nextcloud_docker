@@ -10,28 +10,44 @@ echo "Bienvenue dans le systeme de deploiement de conteneurs Nextcloud"
 echo "saisisez le nom du client s'il vous plait"
 read NomClient
 
-mkdir $NomClient && cd $NomClient
+mkdir -p ${NomClient}_nextcloud && cd ${NomClient}_nextcloud
 
-echo "veuillez saisir l'url souhaité pour votre instance ex : cloud.daqg-info.ovh"
+echo "veuillez saisir l'url souhaité pour votre instance ex : cloud.daqg-info.ovh
+p.s. : l'url souhaite doit pointer vers l'ip de ce serveur"
 read NEXTCLOUD_URL
 
-git clone https://github.com/anastas001/nextcloud_docker && cd nextcloud_docker
+echo "veuillez saisir la limite de la memoire allouee en m"
+read MEM_LIMIT
+
+echo "veuillez saisir la memoire reservee en m"
+read MEM_RESERVATION
+
+echo "veuillez saisir la limite du CPU en %"
+read CPU_LIMIT
+
+cp /home/debian/awesome-traefik/docker-compose.yaml .
 
 # generation du mot de passe sql
 MYSQL_PASS=$(generationMDP)
-mysqlroot=$(generationMDP)
+MYSQL_ROOT=$(generationMDP)
 
 echo "le script va generer un mot de passe aleatoire"
 
 NEXTCLOUD_ADMIN_PASSWORD=$(generationMDP)
 
+SERVICE=Nextcloud_${NomClient}
+
+sed -i "s/SERVICE/$SERVICE/g" docker-compose.yaml
 
 echo "NEXTCLOUD_URL=$NEXTCLOUD_URL
 NEXTCLOUD_ADMIN_PASSWORD=$NEXTCLOUD_ADMIN_PASSWORD
 MYSQL_PASS=$MYSQL_PASS
-MYSQL_ROOT=$mysqlroot
+MYSQL_ROOT=$MYSQL_ROOT
 SQL_NAME=SQL_$NomClient
-NX_NAME=Nextcloud_$NomClient" > .env
+NX_NAME=Nextcloud_$NomClient
+MEM_LIMIT=${MEM_LIMIT}M
+MEM_RESERVATION=${MEM_RESERVATION}M
+CPU_LIMIT=$CPU_LIMIT" > .env
 
 docker-compose up -d
 echo "Voici le recapitulatif de votre instance, enregistrez bien ces infos
