@@ -25,7 +25,7 @@ read MEM_RESERVATION
 echo "veuillez saisir la limite du CPU en %"
 read CPU_LIMIT
 
-cp /home/debian/awesome-traefik/docker-compose.yaml .
+wget -O docker-compose.yaml https://github.com/anastas001/nextcloud_docker/raw/main/docker-compose.yaml
 
 # generation du mot de passe sql
 MYSQL_PASS=$(generationMDP)
