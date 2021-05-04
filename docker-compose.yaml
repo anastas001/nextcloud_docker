@@ -22,7 +22,7 @@ services:
     restart: unless-stopped
     container_name: ${NX_NAME}
     environment:
-      MYSQL_HOST: "database"
+      MYSQL_HOST: ${SQL_NAME}
       MYSQL_DATABASE: "nextcloud"
       MYSQL_USER: "nextcloud"
       MYSQL_PASSWORD: ${MYSQL_PASS}
@@ -42,9 +42,9 @@ services:
     labels:
       traefik.enable: true
       traefik.docker.network: traefik_web
-      traefik.http.routers.nextcloud.entrypoints: websecure
-      traefik.http.routers.nextcloud.rule: 'Host(`${NEXTCLOUD_URL}`)'
-      traefik.http.services.nextcloud.loadbalancer.server.port: 80
+      traefik.http.routers.SERVICE.entrypoints: websecure
+      traefik.http.routers.SERVICE.rule: 'Host(`${NEXTCLOUD_URL}`)'
+      traefik.http.services.SERVICE.loadbalancer.server.port: 80
       
 
 networks:
